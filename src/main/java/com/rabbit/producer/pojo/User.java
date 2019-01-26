@@ -1,3 +1,5 @@
+package com.rabbit.producer.pojo;
+
 public class User {
     private String userName;
     private String lastName;
@@ -38,7 +40,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "com.rabbit.producer.pojo.User{" +
                 "userName='" + userName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
