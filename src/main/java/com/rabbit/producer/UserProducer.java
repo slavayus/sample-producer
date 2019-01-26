@@ -5,6 +5,7 @@ import com.rabbit.producer.pojo.User;
 import com.rabbit.producer.utils.UserUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public class UserProducer {
     private AmqpTemplate template;
     private List<User> users;
     private Gson gson;
+    @Value("${rabbitmq.routingkey.adult}")
+    String adultRoutingKey;
+    @Value("${rabbitmq.routingkey.young}")
+    String youngRoutingKey;
 
     @Autowired
     public UserProducer(AmqpTemplate template) {
@@ -32,11 +37,11 @@ public class UserProducer {
 
     void adult() {
         System.out.println("Emit as adult");
-        template.convertAndSend("adult", gson.toJson(UserUtils.filerAdultUsers(users)));
+        template.convertAndSend(adultRoutingKey, gson.toJson(UserUtils.filerAdultUsers(users)));
     }
 
     void young() {
         System.out.println("Emit as young");
-        template.convertAndSend("young", gson.toJson(UserUtils.filerYoungUsers(users)));
+        template.convertAndSend(youngRoutingKey, gson.toJson(UserUtils.filerYoungUsers(users)));
     }
 }
