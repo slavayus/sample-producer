@@ -14,10 +14,13 @@ public class UserProducer {
         this.template = template;
     }
 
+    void adult() {
+        System.out.println("Emit as adult");
+        template.convertAndSend("adult", "Adult");
+    }
 
-    void sendToQueue() {
-        String message = "Message to queue Users";
-        template.convertAndSend("users", message);
-        System.out.println(" [x] Sent '" + message + "'");
+    void young() {
+        System.out.println("Emit as young");
+        template.convertAndSend("young", "Young");
     }
 }

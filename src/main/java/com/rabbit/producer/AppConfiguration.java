@@ -10,6 +10,7 @@ public class AppConfiguration {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
         UserProducer producer = context.getBean("userProducer", UserProducer.class);
-        producer.sendToQueue();
+        producer.adult();
+        producer.young();
     }
 }
